@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block link %}
+    <link href="{% static 'graphpin/setting.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div id="main">
+        {% if page == 0 %}
+            <h2 class="header">Boards</h2><br/>
+            {% for bid, bname, allow in boards %}
+                <div class="line">
+                    <div style="width: 150px;">
+                        <a class="text" href="/graphpin/board/?bid={{ bid }}">{{ bname }}</a>
+                    </div>
+                    <div class="button">
+                        <a href="/graphpin/setting/?action=1&bid={{ bid }}" class="button_a">
+                            <button class="btn btn-danger btn-xs">Delete</button>
+                        </a>
+                    </div>
+                    {% if allow == "T" %}
+                        <a href="/graphpin/setting/?action=2&bid={{ bid }}&disallow=1" class="button_a">
+                            <button class="btn btn-danger btn-xs">Disallow stranger comments</button>
+                        </a>
+                    {% else %}
+                         <a href="/graphpin/setting/?action=2&bid={{ bid }}&allow=1" class="button_a">
+                            <button class="btn btn-primary btn-xs">Allow stranger comments</button>
+                        </a>
+                    {% endif %}
+                </div><br/>
+            {% endfor %}<br/><br/>
+
+            <h2 class="header">Streams</h2><br/>
+            {% for fid, fname in streams %}
+                <div class="line">
+                    <a href="/graphpin/setting/?page=1&fid={{ fid }}">{{ fname }}</a>
+                    <a href="/graphpin/setting/?action=3&fid={{ fid }}" class="button_a">
+                        <button class="btn btn-danger btn-xs">Delete</button>
+                    </a>
+                </div>
+            {% endfor %}
+        {% elif page == 1 %}
+            <h2 class="header">Stream: {{ fname }}</h2><br/>
+            {% for bid, bname, uid, uname in b_u %}
+                <div class="line">
+                    <a href="/graphpin/board/?bid={{ bid }}">{{ bname }}</a>
+                    by
+                    <a href="/graphpin/user/?uid={{ uid }}">{{ uname }}</a>
+                    <a href="/graphpin/setting/?page=1&action=4&bid={{ bid }}&fid={{ fid }}" class="button_a">
+                        <button class="btn btn-danger btn-xs">Delete</button>
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+

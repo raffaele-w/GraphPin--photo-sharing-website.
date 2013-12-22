@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div style="width: 300px; margin: 200px auto;">
+        <form method="post" action=".">
+            {% csrf_token %}
+            {% if pid %}
+                <input type="text" style="display:none" name='pid' value="{{ pid }}"
+            {% endif %}
+            <label><strong>Board</strong></label>
+            <div style="width: 150px; margin-left: 10px; display:inline-block">
+                <select class="form-control" name="board">
+                    {% for bid, bname in boards %}
+                        <option value="{{ bid }}">{{ bname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <br/><br/><br/>
+            <label>Tags</label>
+            <input class="form-control" type="text" name="tag1" placeholder="tag 1"/>
+            <input class="form-control" type="text" name="tag2" placeholder="tag 2"/>
+            <input class="form-control" type="text" name="tag3" placeholder="tag 3"/>
+            <div style="width: 200px; margin-top: 100px; margin-left: auto; margin-right: auto;">
+            <button class="btn btn-lg btn-success btn-block" type="submit">
+                Pin it
+            </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+
+
+

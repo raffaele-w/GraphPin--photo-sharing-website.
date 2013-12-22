@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block link %}
+    <link href="{% static 'graphpin/picture.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div id="top">
+        <form action="{{ url }}" id="website">
+            <button class="btn btn-lg btn-primary btn-block">Website</button>
+        </form>
+        <form action="{{ img }}" id="original">
+            <button class="btn btn-lg btn-success btn-block">Original</button>
+        </form>
+    </div>
+    <div id="center">
+        <img src="{{ img }}" id="center_img"/>
+    </div>
+    <div id="right">
+        {% for tag in tags %}
+            <label class="tags">{{ tag }}</label><br/>
+        {% endfor %}
+    </div>
+    <div id="bottom">
+        <button class="btn btn-default">{{ num_likes }} likes</button>
+    </div>
+    <div id="like_pin">
+        <a href="/graphpin/pin/{{ pid }}/" id="pin">
+            <button class="btn btn-lg btn-success btn-block">Pin</button>
+        </a>
+
+        {% if is_like %}
+                <a id="like" href="/graphpin/result/?pid={{ pid }}&like=1">
+                    <button class="btn btn-lg btn-primary btn-block">Like</button>
+                </a>
+        {% else %}
+            <a id="like" href="/graphpin/result/?pid={{ pid }}&unlike=1">
+                <button class="btn btn-lg btn-danger btn-block">Unlike</button>
+            </a>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+
+
+

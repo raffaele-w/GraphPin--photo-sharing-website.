@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block link %}
+    <link href="{% static 'graphpin/search.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+        <div class="text">
+            <h2>Friend requests</h2>
+            {% for uid, uname in users %}
+                <a href="/graphpin/user/?uid={{ uid }}"><span>{{ uname }}</span></a>
+                wants to be a friend.
+                <br/>
+                <a href="/graphpin/req/?confirm=1&uid={{ uid }}" style="text-decoration: none; display: inline-block;">
+                    <button class="btn btn-sm btn-success">Confirm</button>
+                </a>
+                <a href="/graphpin/req/?decline=1&uid={{ uid }}" style="text-decoration: none; display: inline-block;">
+                    <button class="btn btn-sm btn-danger">Decline</button>
+                </a>
+                <br/><br/>
+            {% endfor %}
+            <br/>
+
+        </div>
+{% endblock %}
+
+

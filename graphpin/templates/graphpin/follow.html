@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div style="width: 300px; margin: 200px auto;">
+        <form method="post" action=".">
+            {% csrf_token %}
+            {% if bid %}
+                <input type="text" style="display:none" name='bid' value="{{ bid }}"
+            {% endif %}
+            <label><strong>Stream</strong></label>
+            <div style="width: 150px; margin-left: 10px; display:inline-block">
+                <select class="form-control" name="stream">
+                    {% for fid, fname in streams %}
+                        <option value="{{ fid }}">{{ fname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <br/><br/>
+            <div style="width: 200px; margin-top: 100px; margin-left: auto; margin-right: auto;">
+            <button class="btn btn-lg btn-success btn-block" type="submit">
+                Add board to stream
+            </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

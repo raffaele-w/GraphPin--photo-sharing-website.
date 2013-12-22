@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block link %}
+	<link href="{% static 'graphpin/starter-template.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	  <div id="upload">
+	  <form action="/graphpin/upload/">
+		<button class="btn btn-lg btn-success btn-block">Upload a pin</button>
+	  </form>
+	  </div>
+
+	  <div id="addpin">
+	  <form action="/graphpin/addurl/">
+		<button class="btn btn-lg btn-primary btn-block">Add pin from URL</button>
+	  </form>
+	  </div>
+
+    <ul class="nav nav-tabs" id="submenu">
+        <li {% if not is_boards and not is_streams %} class="active" {% endif %}>
+            <a href="/graphpin/home/">Recommended</a>
+        </li>
+        <li {% if is_boards %} class="active" {% endif %}>
+            <a href="/graphpin/home/boards/">Boards</a>
+        </li>
+        <li {% if is_streams %} class="active" {% endif %}>
+            <a href="/graphpin/home/streams/">Streams</a>
+        </li>
+    </ul>
+
+    <div id="pane">
+        {% if is_boards %}
+            <div id="pane_left">
+                <form action="/graphpin/home/boards/" method="post">
+                    {% csrf_token %}
+                    <input style="width: 200px;" name="create_bname" type="form-control" placeholder="board name"/>
+                    <div style="width 200px; margin-top: 5px">
+                    <button class="btn btn-lg btn-default">
+                        + Create board
+                    </button>
+                    </div>
+                </form><br/>
+
+                <div>
+                <h3>Boards</h3>
+                {% for bid, bname in boards %}
+                    <a href="/graphpin/home/boards/?bid={{ bid }}">{{ bname }}</a><br/>
+                {% endfor %}
+                </div>
+            </div>
+            <div id="pane_right">
+                {% for pid, pinid, img in pics %}
+                    <div style="display: inline-block">
+                        <a href="/graphpin/picture/?bid={{ bid }}&pid={{ pid }}&pinid={{ pinid }}"><img class="pics" src="{{ img }}"/></a>
+                    </div>
+                    {% if forloop.counter|divisibleby:"4" %}
+                        <br/>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        {% elif is_streams %}
+            <div id="pane_left">
+                <form action="/graphpin/home/streams/" method="post">
+                    {% csrf_token %}
+                    <input style="width: 200px;" name="create_fname" type="form-control" placeholder="stream name"/>
+                    <input style="width: 200px;" name="create_fquery" type="form-control" placeholder="stream query"/>
+                    <div style="width 200px; margin-top: 5px">
+                    <button class="btn btn-lg btn-default">
+                        + Create stream
+                    </button>
+                    </div>
+                </form><br/>
+
+                <div>
+                <h3>Streams</h3>
+                {% for fid, fname in streams %}
+                    <a href="/graphpin/home/streams/?fid={{ fid }}">{{ fname }}</a><br/>
+                {% endfor %}
+                </div>
+
+            </div>
+            <div id="pane_right">
+                {% for bid, pid, pinid, img in pics %}
+                    <div style="display: inline-block">
+                        <a href="/graphpin/picture/?bid={{ bid }}&pid={{ pid }}&pinid={{ pinid }}"><img class="pics" src="{{ img }}"/></a>
+                    </div>
+                    {% if forloop.counter|divisibleby:"4" %}
+                        <br/>
+                    {% endif %}
+                {% endfor %}
+
+                <br/>
+                {% for pid, img in f_pics %}
+                    <div style="display: inline-block">
+                        <a href="/graphpin/result/?pid={{ pid }}"><img class="pics" src="{{ img }}"/></a>
+                    </div>
+                    {% if forloop.counter|divisibleby:"4" %}
+                        <br/>
+                    {% endif %}
+                {% endfor %}
+                <br/>
+            </div>
+        {% else %}
+            <div class="pic_block">
+                {% for pid, img in recommended %}
+                    <div style="display: inline-block">
+                        <a href="/graphpin/result/?pid={{ pid }}"><img class="pics" src="{{ img }}"/></a>
+                    </div>
+                    {% if forloop.counter|divisibleby:"4" %}
+                        <br/>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+

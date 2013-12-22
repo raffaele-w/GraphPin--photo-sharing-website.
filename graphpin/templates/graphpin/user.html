@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block link %}
+    <link href="{% static 'graphpin/search.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+        <div class="text">
+            <h2>{{ uname }}'s boards</h2>
+            {% for bid, bname in boards %}
+                <a href="/graphpin/board/?bid={{ bid }}"><span>{{ bname }}</span></a><br/>
+            {% endfor %}
+            <br/>
+            {% if f_type == 0 %}
+                <button class="btn btn-lg btn-default btn-block">friends</button>
+            {% elif f_type == 1 %}
+                <button class="btn btn-lg btn-default btn-block">request sent</button>
+            {% elif f_type == 2 %}
+                <a href="/graphpin/user/?confirm=1&uid={{ uid }}" style="text-decoration: none;">
+                    <button class="btn btn-lg btn-primary btn-block">Confirm</button>
+                </a>
+            {% elif f_type == 3 %}
+                <a href="/graphpin/user/?add=1&uid={{ uid }}" style="text-decoration: none;">
+                    <button class="btn btn-lg btn-success btn-block">Add friend</button>
+                </a>
+            {% endif %}
+        </div>
+{% endblock %}
+

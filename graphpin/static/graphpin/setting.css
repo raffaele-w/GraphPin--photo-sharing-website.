@@ -1,0 +1,24 @@
+#main {
+    margin: 100px auto 20px;
+    width: 200px;
+}
+
+.line {
+    width: 500px;
+}
+
+.text {
+    min-width: 200px;
+    display: inline-block;
+}
+
+.button {
+    mid-width: 200px;
+    display: inline-block;
+}
+
+.header {
+    text-align: center;
+}
+
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block link %}
+    <link href="{% static 'graphpin/search.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+        <div class="text">
+            <h2>Friends</h2>
+            {% for uid, uname in f1 %}
+                <a href="/graphpin/user/?uid={{ uid }}"><span>{{ uname }}</span></a><br/>
+            {% endfor %}
+            <br/>
+            {% for uid, uname in f2 %}
+                <a href="/graphpin/user/?uid={{ uid }}"><span>{{ uname }}</span></a><br/>
+            {% endfor %}
+            <br/>
+        </div>
+{% endblock %}
+
+
+

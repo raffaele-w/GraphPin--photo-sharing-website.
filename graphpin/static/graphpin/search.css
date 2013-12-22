@@ -1,0 +1,33 @@
+.text {
+    margin: 200px auto 10px;
+    width: 400px;
+    text-align: center;
+}
+
+span {
+    font-size: 15px;
+}
+
+.pics {
+    width: 200px;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+.pic_header {
+    margin: 100px auto 10px;
+    width: 900px;
+    height: 50px;
+}
+
+.pic_block {
+    margin: 30px auto 10px;
+    width: 900px;
+}
+
+#header {
+    float: left;
+    font-family: "helvetica neue";
+    font-size: 30px;
+}

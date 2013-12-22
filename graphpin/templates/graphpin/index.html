@@ -1,0 +1,31 @@
+{% extends 'welcome.html' %}
+{% load staticfiles %}
+
+{% block link %}
+    <link href="{% static 'graphpin/signin.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+      <br/><br/><br/>
+      <form class="form-signin" role="form" action="." method="post">
+        {% csrf_token %}
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
+        <input type="password" class="form-control" name="pwd" placeholder="Password" required>
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        {% if invalid_pwd %}
+          <div class="alert alert-danger">Invalid password</div>
+        {% endif %}
+      </form>
+
+      <form class="form-signin" role="form" action="/graphpin/signup/">
+        <h2>New user?</h2>
+        <button class="btn btn-lg btn-success btn-block">
+            Sign up
+        </button>
+      </form>
+{% endblock %}
+

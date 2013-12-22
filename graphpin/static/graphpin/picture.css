@@ -1,0 +1,66 @@
+#top {
+    width: 600px;
+    height: 60px;
+    margin: 100px auto 10px;
+}
+
+#website {
+    float: right;
+    width: 80px;
+    height: 40px;
+}
+
+#original {
+    float: right;
+    width: 80px;
+    margin-right: 10px;
+    height: 40px;
+}
+
+#center {
+    margin: 10px auto 10px;
+    width: 600px;
+}
+
+#center_img {
+    width: 600px;
+}
+
+#right {
+    width: 150px;
+    display: inline-block;
+}
+
+#bottom {
+    margin: 10px auto 10px;
+    width: 500px;
+}
+
+#like_pin {
+    margin: 10px auto 10px;
+    width: 600px;
+    height: 100px;
+}
+
+#pin {
+    float: right;
+    width: 100px;
+    text-decoration: none;
+}
+
+#like {
+    float: right;
+    width: 100px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    text-decoration: none;
+}
+
+#comments {
+    width: 600px;
+    margin: 10px auto 100px;
+}
+
+
+
+

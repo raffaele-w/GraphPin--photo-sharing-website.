@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block link %}
+    <link href="{% static 'graphpin/signin.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+      <br/><br/><br/><br/>
+      <form class="form-signin" role="form" action="." method="post">
+        {% csrf_token %}
+        <h2>{{ the_user }}</h2><br/>
+        <label>Email</label><br/>
+        <input type="text" value="{{ email }}" name="email" class="form-control" required><br/>
+        <label>Gender</label><br/>
+        <label><input type="radio" name="gender" value="M" {% if gender == "M" %}checked{% endif %}>  Male </label>
+        <label><input type="radio" name="gender" value="F" {% if gender == "F" %}checked{% endif %}>  Female </label><br/><br/>
+        <label>Location</label><br/>
+        <input type="text" name="location" class="form-control" value="{{ location }}" required><br/><br/><br/>
+
+        <button class="btn btn-lg btn-success btn-block" type="submit">Save</button>
+      </form>
+    <div style="width: 300px; margin: 0px auto 20px;">
+        <a href="/graphpin/home/" style="text-decoration: none"><button class="btn btn-lg btn-danger btn-block">Cancel</button></a>
+    </div>
+{% endblock %}
+
+

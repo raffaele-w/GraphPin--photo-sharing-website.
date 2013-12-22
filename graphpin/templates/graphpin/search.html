@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block link %}
+    <link href="{% static 'graphpin/search.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    {% if page == -1 %}
+        <div class="text">
+            <h2>No result has been found.</h2>
+        </div>
+    {% elif page == 1 %}
+        <div class="text">
+            <h2>User</h2>
+            {% for uid, uname in user %}
+                <a href="/graphpin/user/?uid={{ uid }}"><span>{{ uname }}</span></a>
+            {% endfor %}
+        </div>
+    {% elif page == 2 %}
+        <div class="text">
+            <h2>Boards</h2>
+            {% for bid, bname, uid, uname in boards %}
+                <a href="/graphpin/board/?bid={{ bid }}"><span>{{ bname }}</span></a>&nbsp;&nbsp;by&nbsp;
+                <a href="/graphpin/user/?uid={{ uid }}"><span>{{ uname }}</span></a><br/>
+            {% endfor %}
+        </div>
+    {% elif page == 3 %}
+        <div class="pic_header">
+            <label id="header">{{ s_text }}</label>
+        </div>
+        <div class="pic_block">
+                {% for pid, img in pictures %}
+                    <div style="display: inline-block">
+                        <a href="/graphpin/result/?pid={{ pid }}"><img class="pics" src="{{ img }}"/></a>
+                    </div>
+                    {% if forloop.counter|divisibleby:"4" %}
+                        <br/>
+                    {% endif %}
+                {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+

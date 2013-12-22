@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome to GraphPin</title>
+
+    <link href="{% static 'graphpin/dist/css/bootstrap.css' %}" rel="stylesheet">
+    {% block link %} {% endblock %}
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <h1 style="text-align: center; color: white;">
+            Welcome to GraphPin
+        </h1>
+    </div>
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'graphpin/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'graphpin/dist/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

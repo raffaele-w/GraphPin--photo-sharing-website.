@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block link %}
+    <link href="{% static 'graphpin/search.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+        <div class="pic_header">
+            <label id="header">{{ bname }}&nbsp;by&nbsp;<a href="/graphpin/user?uid={{ uid }}">{{ uname }}</a>
+                <a href="/graphpin/follow/?bid={{ bid }}" style="text-decoration: none;"><button class="btn btn-sm btn-primary btn-block">Follow</button></a>
+            </label>
+        </div>
+        <div class="pic_block">
+                {% for pid, img, pinid in pictures %}
+                    <div style="display: inline-block">
+                        <a href="/graphpin/picture/?bid={{ bid }}&pid={{ pid }}&pinid={{ pinid }}"><img class="pics" src="{{ img }}"/></a>
+                    </div>
+                    {% if forloop.counter|divisibleby:"4" %}
+                        <br/>
+                    {% endif %}
+                {% endfor %}
+        </div>
+{% endblock %}
+

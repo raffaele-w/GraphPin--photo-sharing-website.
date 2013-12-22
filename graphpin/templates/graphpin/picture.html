@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block link %}
+    <link href="{% static 'graphpin/picture.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div id="top">
+        <form action="{{ url }}" id="website">
+            <button class="btn btn-lg btn-primary btn-block">Website</button>
+        </form>
+        <form action="{{ img }}" id="original">
+            <button class="btn btn-lg btn-success btn-block">Original</button>
+        </form>
+    </div>
+    <div id="center">
+        <img src="{{ img }}" id="center_img"/>
+    </div>
+    <div id="right">
+        {% for tag in tags %}
+            <label class="tags">{{ tag }}</label><br/>
+        {% endfor %}
+    </div>
+    <div id="bottom">
+        <button class="btn btn-default">{{ num_likes }} likes</button>
+    </div>
+    <div id="like_pin">
+        {% if is_pin %}
+            <a href="/graphpin/pin/{{ pid }}/" id="pin">
+                <button class="btn btn-lg btn-success btn-block">Pin</button>
+            </a>
+        {% elif is_unpin %}
+            <a href="/graphpin/picture/?bid={{ bid }}&pid={{ pid }}&pinid={{ pinid }}&unpin=1" id="pin">
+                <button class="btn btn-lg btn-alert btn-block">Unpin</button>
+            </a>
+        {% elif is_delete %}
+            <a href="/graphpin/picture/?bid={{ bid }}&pid={{ pid }}&pinid={{ pinid }}&delete=1" id="pin">
+                <button class="btn btn-lg btn-danger btn-block">Delete</button>
+            </a>
+        {% endif %}
+
+        {% if is_like %}
+                <a id="like" href="/graphpin/picture/?bid={{ bid }}&pid={{ pid }}&pinid={{ pinid }}&like=1">
+                    <button class="btn btn-lg btn-primary btn-block">Like</button>
+                </a>
+        {% else %}
+            <a id="like" href="/graphpin/picture/?bid={{ bid }}&pid={{ pid }}&pinid={{ pinid }}&unlike=1">
+                <button class="btn btn-lg btn-danger btn-block">Unlike</button>
+            </a>
+        {% endif %}
+    </div>
+    <div id="comments">
+        <h3>Comments</h3><br/>
+        {% for uname, content, tm in comments %}
+            <label>
+                <span style="font-size: 16px;">{{ uname }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span style="text-align: right">{{ tm }}</span><br/>{{ content }}
+            </label><br/>
+        {% endfor %}
+        <br/>
+        <h4>{{ cur_uname }}</h4>
+        <form action="." method="post">
+            {% csrf_token %}
+            <input type="text" value="{{ bid }}" name="bid" style="display: none"/>
+            <input type="text" value="{{ pid }}" name="pid" style="display: none"/>
+            <input type="text" value="{{ pinid }}" name="pinid" style="display: none"/>
+            <input type="textarea" placeholder="Add a comment..." name="cmt" class="form-control"/>
+            <button class="btn btn-lg btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+
+
+{% endblock %}
+
+
+
+
